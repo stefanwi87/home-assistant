@@ -120,7 +120,9 @@ class LovelaceStorage(LovelaceConfig):
 
     async def async_delete(self):
         """Delete config."""
-        await self.async_save(None)
+        await self._store.async_remove()
+        self._data = None
+        self._config_updated()
 
     async def _load(self):
         """Load the config."""
